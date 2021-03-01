@@ -1,0 +1,112 @@
+.footer__top {
+    background: $footer1;
+    padding: 3rem 2rem;
+
+    &__box {
+        display: flex;
+        flex-direction: column;
+
+        @include tablet {
+            flex-direction: row;
+        }
+    }
+
+    &__left, 
+    &__right {
+        flex-basis: 50%;
+    }
+
+    .footer__top__left__text {
+        margin: 1rem 0 2rem;
+        max-width: 300px;
+        font-size: 1rem;
+    }
+
+    .footer__top__left__icons {
+        display: flex;
+        
+        li {
+            margin-right: 1rem;
+            cursor: pointer;
+
+            i {
+                font-size: 1.3rem;
+                color: $nav;
+
+                &:hover {
+                    color: rgba($black, .8);
+                }
+            }
+        }
+    }
+
+    &__right {
+        margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+
+        @include tablet {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        @include desktop {
+            margin-top: 0;
+        }
+
+        .footer__col__title {
+            text-transform: uppercase;
+            font-size: .75rem;
+            margin-bottom: 1.5rem;
+            margin-top: 1.5rem;
+
+            @include tablet {
+                margin-top: 0;
+            }
+    
+        }
+
+        .footer__col__item {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            
+            a {
+                color: $text;
+                text-transform: capitalize;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+.footer__bottom {
+    background: $footer2;
+
+    &__list {
+        display: flex;
+        align-items: center;
+
+        li {
+            line-height: 3;
+
+        }
+    }
+
+    a {
+        color: $text;
+        padding: 1rem;
+        font-size: .9rem;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    p   {
+        font-size: .9rem;
+        padding: 1rem;
+    }
+}

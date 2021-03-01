@@ -1,0 +1,38 @@
+.btn {
+    margin-bottom: .5rem;
+    text-align: center;
+    font-weight: 700;
+    border-radius: 8px;
+    padding: .5rem 0; 
+    width: 100%;
+
+    &__primary {
+        background: $active;
+        border: 1px solid $active;
+        color: $white;
+        transition: all .4s;
+
+        &:hover {
+            background: rgba($active, .9);
+            border: 1px solid rgba($active, .9);
+        }
+        
+        a {
+            color: $white;
+        }
+
+        &--hero {
+            max-width: 250px;
+        }
+    }
+
+    &__secondary {
+        background: $white;
+        color: $black;
+        border: 1px solid rgba($nav, .4);
+
+        a {
+            color: $text;
+        }
+    }
+}

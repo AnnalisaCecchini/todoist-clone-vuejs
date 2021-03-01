@@ -1,0 +1,144 @@
+// SET UP
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $titles;
+}
+
+// MEDIA QUERY
+$tablet: 769px;
+$desktop: 959px;
+
+@mixin tablet {
+  @media screen and (min-width: #{$tablet}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+    @media screen and (min-width: #{$desktop}) {
+      @content;
+    }
+  }
+
+// TYPOGARPHY
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+
+.t-upper {
+    text-transform: uppercase;
+}
+
+.t-unline {
+    text-decoration: underline;
+}
+
+.t-center {
+    text-align: center;
+}
+
+h2 {
+    font-size: 2rem;
+    line-height: 1.1;
+    letter-spacing: .04rem;
+    color: $text;
+
+    @include tablet {
+        font-size: 2.75rem;
+    }
+
+    @include desktop {
+        font-size: 3.5rem;
+
+    }
+}
+
+h4 {
+    font-size: 1.3rem;
+    line-height: 1.4;
+    color: $text;
+
+    @include tablet {
+        font-size: 1.5rem;
+    }
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    letter-spacing: -.01em;
+    color: $text;
+
+    @include tablet {
+        font-size: 1.25rem;
+    }
+
+    @include desktop {
+        font-size: 1.35rem;
+    }
+}
+
+.p-small {
+    font-size: .9rem;
+    line-height: 1.5;
+    color: $text;
+
+    @include tablet {
+        font-size: 1rem;
+    }
+}
+
+.p-big {
+    font-size: 2.2rem;
+    line-height: 1.2;
+    margin-top: .8rem;
+    color: $text;
+
+    @include tablet {
+        font-size: 2.9rem;
+    }
+
+    @include desktop {
+        font-size: 3.2rem;
+    }
+}
+
+
+// LAYOUT
+.container {
+    max-width: 1170px;
+    margin: auto;
+    position: relative;
+}
+
+.container--small {
+    max-width: 992px;
+    margin: auto;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+// TRANSITIONS
+@mixin transition-ease {
+    transition: all .4s ease-in-out;
+}
+
+@mixin transition-ease-fast {
+    transition: all .2s ease-in-out;
+}
+
+@mixin transition-none {
+    transition: none;
+}

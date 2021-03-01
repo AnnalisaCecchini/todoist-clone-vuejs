@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todoist | Clone - Todos</title>
+     <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="./dist/css/app.css">
+    </head>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header container">
+            <div class="menu-btn">
+                <span class="menu-btn__burger"></span>
+            </div>
+        
+            <!-- logo mobile -->
+            <a class="nav-logo--mobile" href="index.html">
+                <img src="images/Todoist_logo_mobile.png" alt="todoist-logo-mobile">
+            </a>
+        
+            <!-- logo desktop -->
+            <a class="nav-logo--desktop" href="index.html">
+                <img src="images/Todoist_logo.png" alt="todoist-logo-desktop">
+            </a>
+
+            <nav class="nav">
+                <ul class="menu-nav">
+                    <li class="menu-nav__item">
+                        <a href="#!" class="menu-nav__link">
+                            Features
+                        </a>
+                    </li>
+                    <li class="menu-nav__item">
+                        <a href="#!" class="menu-nav__link">
+                            Premium
+                        </a>
+                    </li>
+                    <li class="menu-nav__item">
+                        <a href="#!" class="menu-nav__link">
+                            For Teams
+                        </a>
+                    </li>
+                    <li class="menu-nav__item">
+                        <a href="#!" class="menu-nav__link">
+                            Resources
+                        </a>
+                    </li>
+                </ul>
+                <ul class="menu-signin">
+                    <li class="menu-signin__item btn btn__secondary">
+                        <a href="#!" class="">
+                            Login
+                        </a>
+                    </li>
+                    <li class="menu-signin__item btn btn__primary">
+                        <a href="#!" class="">
+                            Signup
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="nav-sign">
+                <ul class="nav-sign__list">
+                    <li class="nav-sign__item">
+                        <a href="#!">Login</a>
+                    </li>
+                    <li class="nav-sign__item">
+                        <a href="#!">Signup</a>
+                    </li>
+                </ul>
+            </div>
+
+            <span class="nav--bg"></span>
+            <!-- </div> -->
+            
+        </div>
+    </header>
+
+    <main id="todos" class="todos ">
+        <!-- Main input -->
+        <div class="container">
+            <!-- Input -->
+            <div class="todo__add">
+                <h2>Your To Do List</h2>
+                <input 
+                    type="text" 
+                    class="todo__add__input" 
+                    v-model="newItem" 
+                    v-on:keyup.enter="addItem" 
+                    placeholder="What about your next to do?"
+                >
+                <form class="todo__form">
+                    <div class="todo__form__choice">
+                        <input type="radio" id="shopping" name="shopping" value="Shopping" v-model="picked" >
+                        <label for="shopping"> 
+                            <i class="fas fa-shopping-cart"></i>
+                        </label>
+                    </div>
+                    <div class="todo__form__choice">
+                        <input type="radio" id="bills" name="bills" value="Bills" v-model="picked">
+                        <label for="bills"> 
+                            <i class="fas fa-money-bill-alt"></i>
+                        </label>
+                    </div>
+                    <div class="todo__form__choice">
+                        <input type="radio" id="friends" name="friends" value="Friends" v-model="picked">
+                        <label for="friends"> 
+                            <i class="fas fa-users"></i>
+                        </label>
+                    </div>
+                </form>
+                
+                <button 
+                    class="btn btn__primary btn__primary--hero nowrap" 
+                    @click="addItem"
+                >Add TO DO</button>
+            </div>
+
+            <!-- output -->
+            <div class="todo__output">
+                <ul v-if="items.length > 0" class="todo__output__list">
+                    <li class="todo__output__item" v-for="(item, index) in items">
+                        <i 
+                            v-if="item.picked == 'Shopping'" 
+                            class="fas fa-shopping-cart"
+                        ></i>
+                        <i 
+                            v-else-if="item.picked == 'Bills'" 
+                            class="fas fa-money-bill-alt"
+                        ></i>
+                        <i 
+                            v-else-if="item.picked == 'Friends'" 
+                            class="fas fa-users"
+                        ></i>
+                        <i 
+                            v-else
+                            class="far fa-circle"
+                        ></i>
+                        <p :class="item.completed ? 'completed' : '' ">{{item.name}}</p>
+
+                        <div class="todo__actions">
+                            <input type="checkbox" @click="completedItem(index)" :checked="item.completed">
+                            <i 
+                                 @click="removeItem(index)"
+    
+                                class="fas fa-trash-alt"
+                            ></i>
+                        </div>                        
+                    </li>
+                </ul>
+                <div v-else class="emptyItem">
+                    <h3 class="todo__empty"><span>So Cool!!!</span><br>You have no pending todos today :) </h3>
+                </div>
+            </div>
+        </div>
+
+        
+    </main>
+
+    
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer__top">
+            <div class="footer__top__box container">
+                <div class="footer__top__left">
+                    <p class="footer__top__left__text">
+                        Join millions of people who organize work and life with Todoist.
+                    </p>
+                    <ul class="footer__top__left__icons">
+                        <li class="footer__top__left__icon">
+                            <i class="fab fa-facebook"></i>
+                        </li>
+                        <li>
+                            <i class="fab fa-twitter"></i>
+                        </li>
+                        <li>
+                            <i class="fab fa-youtube"></i>
+                        </li>
+                        <li>
+                            <i class="fab fa-instagram"></i>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer__top__right">
+                    <div class="footer__col">
+                        <p class="footer__col__title">
+                            features
+                        </p>
+                        <ul class="footer__col_list">
+                            <li class="footer__col__item">
+                                <a href="#!">how it works</a>
+                            </li>
+                            <li class="footer__col__item">
+                                <a href="#!">premium</a>
+                            </li>
+                            <li class="footer__col__item">
+                                <a href="#!">for teams</a>
+                            </li>
+                            <li class="footer__col__item">
+                                <a href="#!">pricing</a>
+                            </li>
+                            <li class="footer__col__item">
+                                <a href="#!">templates</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer__col">
+                        <p class="footer__col__title">
+                            resources
+                        </p>
+                        <ul class="footer__col_list">
+                            <li class="footer__col__item">
+                                <a href="#!">download apps</a>
+                            </li>
+                            <li class="footer__col__item">
+                                <a href="#!">help center</a>
+                            </li>
+                            <li class="footer__col__item">
+                                <a href="#!">productivity methods</a>
+                            </li>
+                            <li class="footer__col__item">
+                                <a href="#!">refer a friend</a>
+                            </li>
+                            <li class="footer__col__item">
+                                <a href="#!">integrations</a>
+                            </li>
+                            <li class="footer__col__item">
+                                <a href="#!">channel partners</a>
+                            </li>
+                            <li class="footer__col__item">
+                                <a href="#!">developer API</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer__col">
+                        <p class="footer__col__title">
+                            company
+                        </p>
+                        <ul class="footer__col_list">
+                            <li class="footer__col__item">
+                                <a href="#!">about us</a>
+                            </li>
+                            <li class="footer__col__item">
+                                <a href="#!">we are hiring!</a>
+                            </li>
+                            <li class="footer__col__item">
+                                <a href="#!">blog</a>
+                            </li>
+                            <li class="footer__col__item">
+                                <a href="#!">press</a>
+                            </li>
+                            <li class="footer__col__item">
+                                <a href="#!">twist</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <ul class="container footer__bottom__list">
+                <li>
+                    <a href="#!">Security</a>
+                </li>
+                <li>
+                    <a href="#!">Privacy</a>
+                </li>
+                <li>
+                    <a href="#!">Terms</a>
+                </li>
+                <li>
+                    <p>&copy; Doist Inc.</p>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="dist/js/app.js"></script>
+    <script src="dist/js/todos.js"></script>
+</body>
+</html>
